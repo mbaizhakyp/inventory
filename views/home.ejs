@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Stack Catalog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    
+    <div class="min-h-screen flex flex-col items-center justify-center p-6">
+        <div class="max-w-4xl w-full text-center">
+
+            <!-- Header Section -->
+            <header class="mb-12">
+                <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
+                    Welcome to the Tech Stack Catalog
+                </h1>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    A curated inventory of programming languages, frameworks, databases, and other technologies used in modern software development.
+                </p>
+            </header>
+
+            <!-- Navigation Links Section -->
+            <main class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Categories Card -->
+                <a href="/categories" class="group block p-8 bg-white rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-1">
+                    <h2 class="text-3xl font-semibold text-gray-900 mb-3">
+                        Browse Categories
+                    </h2>
+                    <p class="text-gray-600 mb-4">
+                        Explore technologies grouped by their role, such as 'Programming Language', 'Database', or 'Frontend Framework'.
+                    </p>
+                    <span class="font-semibold text-indigo-600 group-hover:text-indigo-800 transition-colors duration-300">
+                        View All Categories &rarr;
+                    </span>
+                </a>
+
+                <!-- Technologies Card -->
+                <a href="/technologies" class="group block p-8 bg-white rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-1">
+                    <h2 class="text-3xl font-semibold text-gray-900 mb-3">
+                        Browse Technologies
+                    </h2>
+                    <p class="text-gray-600 mb-4">
+                        Dive into a comprehensive list of individual technologies like JavaScript, React, PostgreSQL, and more.
+                    </p>
+                    <span class="font-semibold text-indigo-600 group-hover:text-indigo-800 transition-colors duration-300">
+                        View All Technologies &rarr;
+                    </span>
+                </a>
+            </main>
+
+            <!-- Footer -->
+            <footer class="mt-16 text-center text-gray-500">
+                <p>&copy; <%= new Date().getFullYear() %> Tech Stack Catalog. A project by a mbaizhakyp.</p>
+            </footer>
+
+        </div>
+    </div>
+
+</body>
+</html>
