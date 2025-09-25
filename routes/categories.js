@@ -15,7 +15,8 @@ router.get("/", async (req, res) => {
 
     res.render("categories", {
         title: "All Categories",
-        categories: viewData
+        categories: viewData,
+        currentPage: 'Categories'
     });
 
   } catch (err) {
@@ -35,7 +36,7 @@ router.get("/:id", async (req, res) => {
       initial_release_year: tech.initial_release_year
     }));
     console.log(viewData);
-    res.render("technologies", { title: "Technologies in Category", technologies: viewData });
+    res.render("technologies", { title: "Technologies in Category", technologies: viewData, currentPage: 'Categories' });
   } catch (err) {
     console.error("Error fetching technologies by category:", err);
     res.status(500).send("Internal Server Error");

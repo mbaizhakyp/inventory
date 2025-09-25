@@ -1,54 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
+      body {
+        font-family: "Inter", sans-serif;
+      }
     </style>
-</head>
-<body class="bg-gray-50 text-gray-800">
+  </head>
+  <body class="bg-gray-50 text-gray-800">
+    <%- include('partials/header') %>
 
     <div class="container mx-auto px-6 py-12">
+      <!-- Page Header -->
+      <header class="mb-10 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900">
+          <%= title %>
+        </h1>
+        <p class="mt-2 text-lg text-gray-600">
+          Explore our curated list of technologies.
+        </p>
+      </header>
 
-        <!-- Page Header -->
-        <header class="mb-10 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold text-gray-900"><%= title %></h1>
-            <p class="text-lg text-gray-600 mt-2">Click on a technology to see more details.</p>
-        </header>
+      <!-- Technologies Grid -->
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
+      >
+        <% technologies.forEach(tech => { %>
+        <div
+          class="group block p-6 bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1"
+        >
+          <div class="flex flex-col items-center text-center">
+            <!-- Logo Section -->
+            <div class="w-20 h-20 mb-4 flex items-center justify-center">
+              <!--
+                              We check if a logo_url exists. If it does, we use it.
+                              If not, we show a generic placeholder to prevent broken images.
+                            -->
+              <% if (tech.logo_url) { %>
+              <img
+                src="<%= tech.logo_url %>"
+                alt="<%= tech.name %> logo"
+                class="max-w-full max-h-full object-contain"
+              />
+              <% } else { %>
+              <!-- Placeholder SVG if no logo is provided -->
+              <svg
+                class="w-16 h-16 text-gray-300"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M17.25 6.75c0 3.28-2.69 5.95-6 5.95s-6-2.67-6-5.95m12 0a6.002 6.002 0 00-12 0m12 0v6.34L11.25 9.75M3.75 6.75v6.34L9.75 9.75"
+                />
+              </svg>
+              <% } %>
+            </div>
 
-        <!-- Technologies Grid -->
-        <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <% if (technologies && technologies.length) { %>
-                <% technologies.forEach(tech => { %>
-                    <a href="<%= tech.url %>" class="group block p-6 bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
-                        <h2 class="text-2xl font-semibold text-gray-900 mb-2 group-hover:text-indigo-600 transition-colors">
-                            <%= tech.name %>
-                        </h2>
-                        <p class="text-gray-600 mb-4">
-                            <%= tech.snippet %>
-                        </p>
-                        <span class="text-sm font-medium text-gray-500">
-                            <%= tech.releaseYear %>
-                        </span>
-                    </a>
-                <% }); %>
-            <% } else { %>
-                <p class="text-center text-gray-500 col-span-full">No technologies found.</p>
-            <% } %>
-        </main>
+            <!-- Name -->
+            <h2
+              class="text-xl font-semibold text-gray-800 mb-2 truncate w-full"
+            >
+              <%= tech.name %>
+            </h2>
 
-        <!-- Footer Navigation -->
-        <footer class="mt-12 text-center">
-            <a href="/" class="text-indigo-600 hover:text-indigo-800 font-semibold transition-colors">&larr; Back to Home</a>
-        </footer>
-
+            <!-- Description Snippet -->
+            <p class="text-gray-500 text-sm">
+              <%= tech.description.substring(0, 70) %>...
+            </p>
+          </div>
+        </div>
+        <% }); %>
+      </div>
     </div>
-
-</body>
+  </body>
 </html>

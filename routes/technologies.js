@@ -9,10 +9,11 @@ technologiesRouter.get("/", async (req, res) => {
       name: tech.name,
       description: tech.description,
       website_url: tech.website_url,
-      initial_release_year: tech.initial_release_year
+      initial_release_year: tech.initial_release_year,
+      logo_url: tech.logo_url
     }));
     console.log(viewData);
-    res.render("technologies", { title: "All Technologies", technologies: viewData });
+    res.render("technologies", { title: "All Technologies", technologies: viewData, currentPage: 'Technologies' });
   } catch (err) {
     console.error("Error fetching technologies:", err);
     res.status(500).send("Internal Server Error");
