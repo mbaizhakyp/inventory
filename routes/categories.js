@@ -8,7 +8,7 @@ router.get("/", async (req, res) => {
     const viewData = allCategories.map((category) => ({
       name: category.name,
       description: category.description,
-      url: `/categories/${category.category_id}`,
+      url: `/technologies/${category.category_id}`,
     }));
 
     console.log(viewData);
@@ -20,29 +20,6 @@ router.get("/", async (req, res) => {
     });
   } catch (err) {
     console.error("Error fetching categories:", err);
-    res.status(500).send("Internal Server Error");
-  }
-});
-
-router.get("/:id", async (req, res) => {
-  const categoryId = req.params.id;
-  try {
-    const technologies = await db.getTechnologiesByCategory(categoryId);
-    const viewData = technologies.map((tech) => ({
-      name: tech.name,
-      description: tech.description,
-      website_url: tech.website_url,
-      initial_release_year: tech.initial_release_year,
-      logo_url: tech.logo_url,
-    }));
-    console.log(viewData);
-    res.render("technologies", {
-      title: "Technologies in Category",
-      technologies: viewData,
-      currentPage: "Categories",
-    });
-  } catch (err) {
-    console.error("Error fetching technologies by category:", err);
     res.status(500).send("Internal Server Error");
   }
 });
