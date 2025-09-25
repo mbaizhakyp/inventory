@@ -8,8 +8,8 @@ DROP TABLE IF EXISTS Categories;
 CREATE TABLE Categories (
     category_id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL UNIQUE,
-    description TEXT,
-    logo_url VARCHAR(255) -- Stores the local path to the SVG logo
+    description TEXT
+    -- The logo_url column has been removed to match the application's needs
 );
 
 CREATE TABLE Technologies (
@@ -19,22 +19,22 @@ CREATE TABLE Technologies (
     website_url VARCHAR(255),
     initial_release_year INT,
     category_id INT,
-    logo_url VARCHAR(255), -- Stores the local path to the SVG logo
+    logo_url VARCHAR(255), -- This is still needed for technologies
     CONSTRAINT fk_category
         FOREIGN KEY(category_id)
         REFERENCES Categories(category_id)
         ON DELETE SET NULL
 );
 
-INSERT INTO Categories (name, description, logo_url) VALUES
-('Programming Language', 'The foundation for creating applications.', 'category-language.svg'),
-('Frontend Framework/Library', 'Tools for building user interfaces.', 'category-frontend.svg'),
-('Backend Framework/Library', 'Tools for building the server-side of applications.', 'category-backend.svg'),
-('Database', 'Systems for storing, retrieving, and managing data.', 'category-database.svg'),
-('Runtime Environment', 'The environment where code is executed.', 'category-runtime.svg');
+-- The INSERT statement no longer includes a logo_url for categories
+INSERT INTO Categories (name, description) VALUES
+('Programming Language', 'The foundation for creating applications.'),
+('Frontend Framework/Library', 'Tools for building user interfaces.'),
+('Backend Framework/Library', 'Tools for building the server-side of applications.'),
+('Database', 'Systems for storing, retrieving, and managing data.'),
+('Runtime Environment', 'The environment where code is executed.');
 
--- All logo_url values now point to a local path.
--- You will need to create these SVG files in your public directory.
+-- This section remains unchanged as technologies still have logos
 INSERT INTO Technologies (name, description, website_url, initial_release_year, category_id, logo_url) VALUES
 ('JavaScript', 'A high-level, dynamic programming language, essential for web development.', 'https://developer.mozilla.org/en-US/docs/Web/JavaScript', 1995, 1, 'javascript.svg'),
 ('Python', 'A versatile language known for its readability, used in web dev, data science, and more.', 'https://www.python.org', 1991, 1, 'python.svg'),
