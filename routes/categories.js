@@ -1,24 +1,23 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 const db = require("../db/queries");
 
 router.get("/", async (req, res) => {
   try {
     const allCategories = await db.getAllCategories();
-    const viewData = allCategories.map(category => ({
+    const viewData = allCategories.map((category) => ({
       name: category.name,
       description: category.description,
-      url: `/categories/${category.category_id}`
+      url: `/categories/${category.category_id}`,
     }));
 
     console.log(viewData);
 
     res.render("categories", {
-        title: "All Categories",
-        categories: viewData,
-        currentPage: 'Categories'
+      title: "All Categories",
+      categories: viewData,
+      currentPage: "Categories",
     });
-
   } catch (err) {
     console.error("Error fetching categories:", err);
     res.status(500).send("Internal Server Error");
@@ -29,14 +28,19 @@ router.get("/:id", async (req, res) => {
   const categoryId = req.params.id;
   try {
     const technologies = await db.getTechnologiesByCategory(categoryId);
-    const viewData = technologies.map(tech => ({
+    const viewData = technologies.map((tech) => ({
       name: tech.name,
       description: tech.description,
       website_url: tech.website_url,
-      initial_release_year: tech.initial_release_year
+      initial_release_year: tech.initial_release_year,
+      logo_url: tech.logo_url,
     }));
     console.log(viewData);
-    res.render("technologies", { title: "Technologies in Category", technologies: viewData, currentPage: 'Categories' });
+    res.render("technologies", {
+      title: "Technologies in Category",
+      technologies: viewData,
+      currentPage: "Categories",
+    });
   } catch (err) {
     console.error("Error fetching technologies by category:", err);
     res.status(500).send("Internal Server Error");
